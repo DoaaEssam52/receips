@@ -4,4 +4,7 @@ export const environment = {
 
   // Authentication
   userLogin: 'login',
+  userRegister: 'Register',
+  userForgetPassword: 'Reset/Request',
+  userResetPassword: 'Reset',
 };

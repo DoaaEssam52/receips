@@ -1,0 +1,229 @@
+<h4>Register</h4>
+
+<p class="mb-4">Welcome Back! Please enter your details</p>
+
+<form [formGroup]="registerForm" class="row">
+  <div class="col-md-6">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-mobile-screen-button"></i>
+        </span>
+      </div>
+      <input
+        type="text"
+        class="form-control input-lg"
+        placeholder="UserName"
+        formControlName="userName"
+      />
+    </div>
+
+    <div
+      *ngIf="
+        registerForm.controls.userName.touched &&
+        registerForm.controls.userName.errors
+      "
+    >
+      <ng-container [ngSwitch]="registerForm.controls.userName | errorMessages">
+        <small class="text-danger" *ngSwitchCase="'required'"
+          >Username is required</small
+        >
+        <small class="text-danger" *ngSwitchCase="'minLength'"
+          >Username should be at least 4 characters</small
+        >
+        <small class="text-danger" *ngSwitchCase="'pattern'"
+          >Username must contain characters and end with numbers without
+          spaces</small
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-mobile-screen-button"></i>
+        </span>
+      </div>
+      <input
+        type="email"
+        class="form-control input-lg"
+        placeholder="Enter your E-mail"
+        formControlName="email"
+      />
+    </div>
+
+    <div
+      *ngIf="
+        registerForm.controls.email.touched &&
+        registerForm.controls.email.errors
+      "
+    >
+      <ng-container [ngSwitch]="registerForm.controls.email | errorMessages">
+        <small class="text-danger" *ngSwitchCase="'required'"
+          >Email is required</small
+        >
+        <small class="text-danger" *ngSwitchCase="'email'"
+          >Enter valid email</small
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-mobile-screen-button"></i>
+        </span>
+      </div>
+      <input
+        type="text"
+        class="form-control input-lg"
+        placeholder="Country"
+        formControlName="country"
+      />
+    </div>
+
+    <div
+      *ngIf="
+        registerForm.controls.country.touched &&
+        registerForm.controls.country.errors
+      "
+    >
+      <ng-container [ngSwitch]="registerForm.controls.country | errorMessages">
+        <small class="text-danger" *ngSwitchCase="'required'"
+          >Country is required</small
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-mobile-screen-button"></i>
+        </span>
+      </div>
+      <input
+        type="text"
+        class="form-control input-lg"
+        placeholder="PhoneNumber"
+        formControlName="phoneNumber"
+      />
+    </div>
+
+    <div
+      *ngIf="
+        registerForm.controls.phoneNumber.touched &&
+        registerForm.controls.phoneNumber.errors
+      "
+    >
+      <ng-container
+        [ngSwitch]="registerForm.controls.phoneNumber | errorMessages"
+      >
+        <small class="text-danger" *ngSwitchCase="'required'"
+          >Phone number is required</small
+        >
+        <small class="text-danger" *ngSwitchCase="'pattern'"
+          >Phone number should start with (010 or 011 or 012 or 015) and
+          contains 11 numbers</small
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="input-group mt-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-lock"></i>
+        </span>
+      </div>
+      <input
+        [type]="passwordShown ? 'text' : 'password'"
+        class="form-control input-lg"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <div class="input-group-append">
+        <span class="input-group-text" (click)="togglePasswordVisibility()">
+          <i [ngClass]="passwordShown ? 'far fa-eye' : 'far fa-eye-slash'"></i>
+        </span>
+      </div>
+    </div>
+
+    <div
+      *ngIf="
+        registerForm.controls.password.touched &&
+        registerForm.controls.password.errors
+      "
+    >
+      <ng-container [ngSwitch]="registerForm.controls.password | errorMessages">
+        <small class="text-danger" *ngSwitchCase="'required'"
+          >Password is required</small
+        >
+        <small class="text-danger" *ngSwitchCase="'minlength'"
+          >Password should be at least 4 characters</small
+        >
+        <small class="text-danger" *ngSwitchCase="'pattern'"
+          >Password should contain at least 1 lowercase 1 uppercase 1 number and
+          1 special character</small
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="input-group mt-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-lock"></i>
+        </span>
+      </div>
+      <input
+        [type]="passwordShown ? 'text' : 'password'"
+        class="form-control input-lg"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <div class="input-group-append">
+        <span class="input-group-text" (click)="togglePasswordVisibility()">
+          <i [ngClass]="passwordShown ? 'far fa-eye' : 'far fa-eye-slash'"></i>
+        </span>
+      </div>
+    </div>
+
+    <div
+      *ngIf="
+        registerForm.controls.password.touched &&
+        registerForm.controls.password.errors
+      "
+    >
+      <ng-container [ngSwitch]="registerForm.controls.password | errorMessages">
+        <small class="text-danger" *ngSwitchCase="'required'"
+          >Password is required</small
+        >
+        <small class="text-danger" *ngSwitchCase="'minlength'"
+          >Password should be at least 4 characters</small
+        >
+        <small class="text-danger" *ngSwitchCase="'pattern'"
+          >Password should contain at least 1 lowercase 1 uppercase 1 number and
+          1 special character</small
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-12 d-flex justify-content-end mt-2 mb-4">
+    <label [routerLink]="'/auth/forget-password'" class="text-primary"
+      >Forgot Password?</label
+    >
+  </div>
+
+  <button class="w-100 py-2 btn btn-primary" (click)="submit()">
+    Register
+  </button>
+</form>

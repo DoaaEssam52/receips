@@ -1,13 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+// GLOBAL STYLES
 @import "~@fortawesome/fontawesome-free/css/all.css";
-
-// COLORS THEMING
-:root {
-  --primary-color: #4aa35a;
-}
-
+@import "ngx-toastr/toastr";
 @import url("./assets/styles/fonts.scss");
 @import url("./assets/styles/elements.scss");
 @import url("./assets/styles/classes.scss");
 @import url("./assets/styles/buttons.scss");
 @import url("./assets/styles/forms.scss");
+
+// COLORS THEMING
+:root {
+  --primary-color: #4aa35a;
+  --secondary-color: #1f263e;
+}
