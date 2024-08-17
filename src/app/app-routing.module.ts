@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
+
+import { MaintainProfileComponent } from './modules/shared/components/maintain-profile/maintain-profile.component';
+
 import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
@@ -18,6 +21,7 @@ const routes: Routes = [
       ),
     canActivate: [authGuard],
   },
+  { path: 'profile', component: MaintainProfileComponent },
 ];
 
 @NgModule({

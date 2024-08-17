@@ -10,6 +10,7 @@ import { LoginRequest } from '../models/login-request-model';
 import { RegisterRequest } from '../models/register-request-model';
 import { ResetPasswordRequest } from '../models/reset-password-request-model';
 import { ForgetPasswordRequest } from '../models/forget-password-request-model';
+import { VerifyCodeRequest } from '../models/verify-code-request-model';
 import { LoginResponse } from '../models/login-response-model';
 
 import { environment } from '../../../../core/environments/environment';
@@ -61,9 +62,16 @@ export class AuthService {
     );
   }
 
-  registerUser(form: RegisterRequest): Observable<any> {
+  registerUser(form: FormData): Observable<any> {
     return this._httpClient.post<any>(
       `${environment.userBaseUrl}/${environment.userRegister}`,
+      form
+    );
+  }
+
+  verifyCode(form: VerifyCodeRequest): Observable<any> {
+    return this._httpClient.put<any>(
+      `${environment.userBaseUrl}/${environment.verifyCode}`,
       form
     );
   }
@@ -78,6 +86,13 @@ export class AuthService {
   resetPasswordUser(form: ResetPasswordRequest): Observable<any> {
     return this._httpClient.post<any>(
       `${environment.userBaseUrl}/${environment.userResetPassword}`,
+      form
+    );
+  }
+
+  changePassword(form: any): Observable<any> {
+    return this._httpClient.put<any>(
+      `${environment.userBaseUrl}/${environment.changePassword}`,
       form
     );
   }

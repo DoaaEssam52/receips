@@ -5,7 +5,7 @@ import { adminGuard } from 'src/app/core/guards/admin.guard';
 import { userGuard } from 'src/app/core/guards/user.guard';
 
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './home/home/home.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {

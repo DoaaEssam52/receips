@@ -1,0 +1,39 @@
+<aside class="sidebar" id="sidebar">
+  <ul class="list-group">
+    <li class="text-center">
+      <img
+        *ngIf="!isCollapsed; else expandIcon"
+        src="../../../../../../assets/images/logo-without-text.svg"
+        class="mt-3 mb-5"
+        (click)="toggleSideBarExpansion()"
+      />
+      <ng-template #expandIcon>
+        <mat-icon class="text-white my-5" (click)="toggleSideBarExpansion()"
+          >menu</mat-icon
+        >
+      </ng-template>
+    </li>
+    <ng-container *ngFor="let route of routes">
+      <li
+        *ngIf="route.present && !route.onClick"
+        class="list-group-item py-3 d-flex align-items-center"
+        [routerLink]="route.routeTo"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+        [class.px-4]="!isCollapsed"
+      >
+        <i [class]="route.iconClass"></i>
+        <span *ngIf="!isCollapsed" class="mx-2">{{ route.text }}</span>
+      </li>
+      <li
+        *ngIf="route.present && route.onClick"
+        class="list-group-item py-3 d-flex align-items-center"
+        [class.px-4]="!isCollapsed"
+        (click)="route.onClick()"
+      >
+        <i [class]="route.iconClass"></i>
+        <span *ngIf="!isCollapsed" class="mx-2">{{ route.text }}</span>
+      </li>
+    </ng-container>
+  </ul>
+</aside>

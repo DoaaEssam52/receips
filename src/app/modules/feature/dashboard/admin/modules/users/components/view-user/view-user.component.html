@@ -1,0 +1,32 @@
+<div class="bg-success text-white">
+  <div class="d-flex justify-content-end p-3">
+    <mat-icon mat-dialog-close>close</mat-icon>
+  </div>
+
+  <div class="text-center px-5 py-3">
+    <img
+      [src]="_handleImagePicker.getImagePath(data.user.imagePath)"
+      class="img-fluid"
+      width="100px"
+      height="100px"
+    />
+    <h2 class="my-3">{{ user.userName }}</h2>
+    <h5>{{ user.email }}</h5>
+  </div>
+</div>
+
+<mat-list>
+  <mat-list-item>
+    <span class="fw-bold">Country: </span> {{ user.country }}</mat-list-item
+  >
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span class="fw-bold">Created at: </span>
+    {{ user.creationDate | date : "dd/MM/YYYY" }}</mat-list-item
+  >
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <span class="fw-bold">Last modified at: </span>
+    {{ user.modificationDate | date : "dd/MM/YYYY" }}
+  </mat-list-item>
+</mat-list>

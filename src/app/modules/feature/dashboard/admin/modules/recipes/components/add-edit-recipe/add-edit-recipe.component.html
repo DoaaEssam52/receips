@@ -1,0 +1,186 @@
+<div class="row mx-0 justify-content-center">
+  <div class="col-12">
+    <div
+      class="my-4 mx-1 rounded-4 p-5 header d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <h5>Fill the <span class="text-primary">Recipes</span> !</h5>
+        <p class="mb-0">
+          you can now fill the meals easily using the table and form , <br />
+          click here and sill it with the table !
+        </p>
+      </div>
+      <button
+        mat-raised-button
+        class="btn-primary text-white px-5"
+        [routerLink]="'/dashboard/admin/recipes'"
+      >
+        All Recipes <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-8">
+    <form [formGroup]="recipeForm">
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="recipe name"
+          formControlName="name"
+        />
+
+        <div
+          *ngIf="
+            recipeForm.controls.name.touched && recipeForm.controls.name.errors
+          "
+        >
+          <ng-container [ngSwitch]="recipeForm.controls.name | errorMessages">
+            <small class="text-danger" *ngSwitchCase="'required'"
+              >name is required</small
+            >
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <textarea
+          type="text"
+          class="form-control"
+          placeholder="recipe description"
+          formControlName="description"
+          rows="4"
+        ></textarea>
+
+        <div
+          *ngIf="
+            recipeForm.controls.description.touched &&
+            recipeForm.controls.description.errors
+          "
+        >
+          <ng-container
+            [ngSwitch]="recipeForm.controls.description | errorMessages"
+          >
+            <small class="text-danger" *ngSwitchCase="'required'"
+              >description is required</small
+            >
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="recipe price"
+          formControlName="price"
+        />
+
+        <div
+          *ngIf="
+            recipeForm.controls.price.touched &&
+            recipeForm.controls.price.errors
+          "
+        >
+          <ng-container [ngSwitch]="recipeForm.controls.price | errorMessages">
+            <small class="text-danger" *ngSwitchCase="'required'"
+              >price is required</small
+            >
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <mat-select
+          class="form-control"
+          placeholder="recipe tag"
+          formControlName="tagId"
+        >
+          <mat-option *ngFor="let tag of tagsDropDown" [value]="tag.id">{{
+            tag.name
+          }}</mat-option>
+        </mat-select>
+
+        <div
+          *ngIf="
+            recipeForm.controls.tagId.touched &&
+            recipeForm.controls.tagId.errors
+          "
+        >
+          <ng-container [ngSwitch]="recipeForm.controls.tagId | errorMessages">
+            <small class="text-danger" *ngSwitchCase="'required'"
+              >tagId is required</small
+            >
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <mat-select
+          class="form-control"
+          placeholder="recipe categories"
+          formControlName="categoriesIds"
+          multiple
+        >
+          <mat-option
+            *ngFor="let category of categoriesDropDown"
+            [value]="category.id"
+            >{{ category.name }}</mat-option
+          >
+        </mat-select>
+
+        <div
+          *ngIf="
+            recipeForm.controls.categoriesIds.touched &&
+            recipeForm.controls.categoriesIds.errors
+          "
+        >
+          <ng-container
+            [ngSwitch]="recipeForm.controls.categoriesIds | errorMessages"
+          >
+            <small class="text-danger" *ngSwitchCase="'required'"
+              >categoriesIds is required</small
+            >
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="input-group dropzone-container mb-3">
+        <ngx-dropzone
+          (change)="selectImage($event)"
+          [disableClick]="files.length > 0"
+        >
+          <ngx-dropzone-label>
+            <mat-icon>file_upload</mat-icon>
+            <br />
+            Drag & Drop or Choose a Item Image to Upload</ngx-dropzone-label
+          >
+          <ngx-dropzone-image-preview
+            ngProjectAs="ngx-dropzone-preview"
+            *ngFor="let f of files"
+            [file]="f"
+            [removable]="true"
+            (removed)="removeImage(f)"
+          >
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
+
+      <div class="col-md-12 d-flex justify-content-end">
+        <button
+          mat-raised-button
+          class="btn-outline-primary text-primary px-5 mx-3"
+          [routerLink]="'/dashboard/admin/recipes'"
+        >
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          class="btn-primary text-white px-4"
+          (click)="submit()"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

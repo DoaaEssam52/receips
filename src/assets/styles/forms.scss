@@ -15,6 +15,13 @@
   .form-control,
   .input-group-text {
     border: none !important;
+
+    &:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: initial !important;
+    }
   }
 
   .form-control {
@@ -24,7 +31,7 @@
   .input-group-text {
     height: 100%;
     background-color: transparent !important;
-    padding: 0 16px;
+    padding: 0 10px;
   }
 
   .input-group-prepend {
@@ -42,11 +49,22 @@
     }
   }
 
-  .input-group-append{
+  .input-group-append {
     cursor: pointer;
   }
 }
 
 .input-lg {
   height: 54px !important;
+
+  &:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: initial !important;
+  }
+}
+
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+  background-color: transparent !important;
 }

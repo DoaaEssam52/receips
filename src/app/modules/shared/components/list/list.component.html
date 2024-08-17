@@ -1,0 +1,105 @@
+<ng-container *ngIf="data && data.length > 0">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let column of headers" scope="col">
+            {{ column.header }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data">
+          <td *ngFor="let column of headers">
+            <ng-container [ngSwitch]="column.type">
+              <span *ngSwitchCase="'text'">{{ row[column.datafiled] }}</span>
+
+              <img
+                *ngSwitchCase="'image'"
+                [src]="
+                  column.datafiled
+                    ? imageUrl + row[column.datafiled]
+                    : '../../../../../assets/images/' + column.defaultImage
+                "
+                width="60"
+                height="60"
+              />
+
+              <span *ngSwitchCase="'date'">{{
+                row[column.datafiled] | date : column.format
+              }}</span>
+
+              <span *ngSwitchCase="'list'">
+                <span
+                  *ngFor="let item of row[column.datafiled]; let isLast = last"
+                  >{{ item }}<span *ngIf="!isLast">,</span>
+                </span>
+              </span>
+
+              <span *ngSwitchCase="'actions'">
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="menu"
+                  aria-label="Example icon-button with a menu"
+                >
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    *ngIf="column.actions?.isView"
+                    (click)="view(row)"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    <span>View</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="edit(row)"
+                    *ngIf="column.actions?.isEdit"
+                  >
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="delete(row?.id)"
+                    *ngIf="column.actions?.isDelete"
+                  >
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="favorite(row)"
+                    *ngIf="column.actions?.isFavorite"
+                  >
+                    <mat-icon>favorite</mat-icon>
+                    <span>Favorite</span>
+                  </button>
+                </mat-menu>
+              </span>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginator
+    (page)="paginate($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+    [hidePageSize]="hidePageSize"
+    [pageIndex]="pageNumber"
+    [disabled]="disabled"
+  >
+  </mat-paginator>
+</ng-container>
+
+<ng-container *ngIf="data && data.length === 0">
+  <empty-list></empty-list>
+</ng-container>

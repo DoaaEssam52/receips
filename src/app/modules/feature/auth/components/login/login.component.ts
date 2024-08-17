@@ -13,7 +13,7 @@ import { LoginRequest } from '../../models/login-request-model';
 import { AuthValidations } from '../../validations/auth-validations';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -55,9 +55,6 @@ export class LoginComponent implements OnDestroy {
             this._auth.getProfile();
 
             this.router.navigate(['/dashboard']);
-          },
-          error: ({ error }) => {
-            this._toastr.error(error.message);
           },
         });
     }

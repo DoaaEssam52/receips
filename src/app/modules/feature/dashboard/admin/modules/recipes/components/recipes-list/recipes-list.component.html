@@ -1,0 +1,89 @@
+<div class="px-4">
+  <div
+    class="banner p-3 border d-flex justify-content-between align-items-center rounded-4"
+  >
+    <div class="px-4">
+      <h1>Recipes Items!</h1>
+      <p>
+        You can now add your items that any user can order it from <br />the
+        Application and you can edit
+      </p>
+    </div>
+    <img src="../../../../../../../../../assets/images/banner-2.svg" />
+  </div>
+
+  <div class="my-4 d-flex justify-content-between align-items-center">
+    <div>
+      <h5>Recipe Table Details</h5>
+      <p class="mb-0">You can check all details</p>
+    </div>
+    <button
+      mat-raised-button
+      class="btn-primary text-white"
+      (click)="addRecipe()"
+    >
+      Add New Item
+    </button>
+  </div>
+
+  <form [formGroup]="filterForm" class="my-4 row mx-0">
+    <div class="col-md-6 px-0">
+      <mat-form-field class="w-100">
+        <input
+          formControlName="name"
+          class="w-100"
+          matInput
+          placeholder="Search"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field class="w-100">
+        <mat-select formControlName="tagId" placeholder="Tag">
+          <mat-option *ngFor="let tag of tagsDropDown" [value]="tag.id">{{
+            tag.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field class="w-100">
+        <mat-select formControlName="categoriesIds" placeholder="Categories">
+          <mat-option
+            *ngFor="let category of categoriesDropDown"
+            [value]="category.id"
+            >{{ category.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-12 px-0">
+      <button
+        mat-raised-button
+        class="btn-primary text-white px-5"
+        (click)="filter()"
+      >
+        Search
+      </button>
+      <button
+        mat-raised-button
+        class="btn-outline-primary text-white mx-2 px-5"
+        (click)="resetFilter()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+
+  <list
+    [headers]="headers"
+    [data]="recipesList"
+    [length]="length"
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    (handleViewEvent)="viewRecipe($event.id)"
+    (handleEditEvent)="editRecipe($event.id)"
+    (handeDeleteEvent)="openDeleteRecipe($event)"
+    (handlePageEvent)="handlePageEvent($event)"
+  ></list>
+</div>

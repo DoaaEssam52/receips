@@ -1,0 +1,274 @@
+<div class="container">
+  <div class="mx-auto mt-4 mb-5 img-container">
+    <ngx-dropzone
+      (change)="selectImage($event)"
+      [disableClick]="files.length > 0"
+      class="rounded-circle"
+    >
+      <ngx-dropzone-label>Select photo</ngx-dropzone-label>
+
+      <ngx-dropzone-image-preview
+        ngProjectAs="ngx-dropzone-preview"
+        *ngFor="let f of files"
+        [file]="f"
+        [removable]="true"
+        (removed)="removeImage(f)"
+      >
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+  </div>
+
+  <form [formGroup]="profileForm" class="row mx-0">
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control input-lg"
+          placeholder="username"
+          formControlName="userName"
+        />
+      </div>
+
+      <div
+        *ngIf="
+          profileForm.controls.userName.touched &&
+          profileForm.controls.userName.errors
+        "
+      >
+        <ng-container
+          [ngSwitch]="profileForm.controls.userName | errorMessages"
+        >
+          <small class="text-danger" *ngSwitchCase="'required'"
+            >Username is required</small
+          >
+          <small class="text-danger" *ngSwitchCase="'minlength'"
+            >Username should be at least 4 characters</small
+          >
+          <small class="text-danger" *ngSwitchCase="'maxlength'"
+            >Username should be at most 8 characters</small
+          >
+          <small class="text-danger" *ngSwitchCase="'pattern'"
+            >Username must contain characters and end with numbers without
+            spaces</small
+          >
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="far fa-envelope"></i>
+          </span>
+        </div>
+        <input
+          type="email"
+          class="form-control input-lg"
+          placeholder="email"
+          formControlName="email"
+        />
+      </div>
+
+      <div
+        *ngIf="
+          profileForm.controls.email.touched &&
+          profileForm.controls.email.errors
+        "
+      >
+        <ng-container [ngSwitch]="profileForm.controls.email | errorMessages">
+          <small class="text-danger" *ngSwitchCase="'required'"
+            >Email is required</small
+          >
+          <small class="text-danger" *ngSwitchCase="'email'"
+            >Enter valid email</small
+          >
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-globe-europe"></i>
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control input-lg"
+          placeholder=" country"
+          formControlName="country"
+        />
+      </div>
+
+      <div
+        *ngIf="
+          profileForm.controls.country.touched &&
+          profileForm.controls.country.errors
+        "
+      >
+        <ng-container [ngSwitch]="profileForm.controls.country | errorMessages">
+          <small class="text-danger" *ngSwitchCase="'required'"
+            >Country is required</small
+          >
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-mobile-screen-button"></i>
+          </span>
+        </div>
+        <input
+          type="tel"
+          class="form-control input-lg"
+          placeholder=" phone number"
+          formControlName="phoneNumber"
+        />
+      </div>
+
+      <div
+        *ngIf="
+          profileForm.controls.phoneNumber.touched &&
+          profileForm.controls.phoneNumber.errors
+        "
+      >
+        <ng-container
+          [ngSwitch]="profileForm.controls.phoneNumber | errorMessages"
+        >
+          <small class="text-danger" *ngSwitchCase="'required'"
+            >Phone number is required</small
+          >
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+        <input
+          [type]="passwordShown ? 'text' : 'password'"
+          class="form-control input-lg"
+          placeholder="password"
+          formControlName="password"
+        />
+        <div class="input-group-append">
+          <span
+            class="input-group-text"
+            (click)="passwordShown = !passwordShown"
+          >
+            <i
+              [ngClass]="passwordShown ? 'far fa-eye' : 'far fa-eye-slash'"
+            ></i>
+          </span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          profileForm.controls.password.touched &&
+          profileForm.controls.password.errors
+        "
+      >
+        <ng-container
+          [ngSwitch]="profileForm.controls.password | errorMessages"
+        >
+          <small class="text-danger" *ngSwitchCase="'required'"
+            >Password is required</small
+          >
+          <small class="text-danger" *ngSwitchCase="'minlength'"
+            >Password should be at least 4 characters</small
+          >
+          <small class="text-danger" *ngSwitchCase="'pattern'"
+            >Password should contain at least 1 lowercase 1 uppercase 1 number
+            and 1 special character</small
+          >
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+        <input
+          [type]="confirmPasswordShown ? 'text' : 'password'"
+          class="form-control input-lg"
+          placeholder="confirm password"
+          formControlName="confirmPassword"
+        />
+        <div class="input-group-append">
+          <span
+            class="input-group-text"
+            (click)="confirmPasswordShown = !confirmPasswordShown"
+          >
+            <i
+              [ngClass]="
+                confirmPasswordShown ? 'far fa-eye' : 'far fa-eye-slash'
+              "
+            ></i>
+          </span>
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          profileForm.controls.confirmPassword.touched &&
+          profileForm.controls.confirmPassword.errors
+        "
+      >
+        <ng-container
+          [ngSwitch]="profileForm.controls.confirmPassword | errorMessages"
+        >
+          <small class="text-danger" *ngSwitchCase="'required'"
+            >Confirm password is required</small
+          >
+          <small class="text-danger" *ngSwitchCase="'minlength'"
+            >Confirm password should be at least 4 characters</small
+          >
+          <small class="text-danger" *ngSwitchCase="'pattern'"
+            >Confirm password should contain at least 1 lowercase 1 uppercase 1
+            number and 1 special character</small
+          >
+        </ng-container>
+        <small
+          class="text-danger"
+          *ngIf="
+          profileForm.controls.confirmPassword.touched &&
+          !profileForm.controls.confirmPassword.errors &&
+          profileForm.errors?.['notMatch']
+        "
+          >Confirm password must match password</small
+        >
+      </div>
+    </div>
+
+    <div class="col-12 row mx-0 justify-content-end mt-2 mb-4">
+      <button
+        class="col-3 mx-2 py-2 btn btn-outline-primary"
+        (click)="editProfile()"
+      >
+        {{ editBtnText }}
+      </button>
+      <button class="col-2 py-2 btn btn-primary" (click)="goBack()">
+        Back
+      </button>
+    </div>
+  </form>
+</div>

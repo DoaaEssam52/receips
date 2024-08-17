@@ -1,30 +1,22 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
 import { ForgetPasswordRequest } from '../../models/forget-password-request-model';
 
-import { AuthValidations } from '../../validations/auth-validations';
-
 @Component({
-  selector: 'app-forget-password',
+  selector: 'forget-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss'],
 })
 export class ForgetPasswordComponent {
   forgetPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(AuthValidations.password.minLength),
-      Validators.pattern(AuthValidations.password.pattern),
-    ]),
   });
 
-  constructor(private _auth: AuthService, private _toastr: ToastrService) {}
+  constructor(private _auth: AuthService, private router: Router) {}
 
   submit(): void {
     this.forgetPasswordForm.markAllAsTouched();
@@ -35,8 +27,9 @@ export class ForgetPasswordComponent {
           this.forgetPasswordForm.value as ForgetPasswordRequest
         )
         .subscribe({
-          next: () => {},
-          error: ({ error }) => {},
+          next: () => {
+            this.router.navigateByUrl('/auth/reset-password');
+          },
         });
     }
   }

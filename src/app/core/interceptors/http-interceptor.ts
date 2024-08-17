@@ -15,9 +15,11 @@ export class HttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const baseUrl = environment.baseUrl;
+    const accessToken = localStorage.getItem('userToken');
 
     let newRequest = request.clone({
       url: baseUrl + '/' + request.url,
+      headers: request.headers.set('Authorization', 'Bearer ' + accessToken),
     });
 
     return next.handle(newRequest);

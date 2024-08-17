@@ -1,0 +1,18 @@
+<div class="card postition-relative">
+  <mat-icon
+    class="delete-icon cursor-pointer text-danger rounded bg-white"
+    (click)="deleteRecipe()"
+    >delete</mat-icon
+  >
+
+  <img
+    class="img-fluid rounded"
+    [src]="_handleImagePicker.getImagePath(recipe.imagePath)"
+  />
+  <div class="card-body rounded-bottom">
+    <h5 class="card-title">{{ recipe.name }}</h5>
+    <p class="card-text">
+      {{ recipe.description }}
+    </p>
+  </div>
+</div>

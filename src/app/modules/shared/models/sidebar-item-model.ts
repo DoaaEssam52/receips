@@ -3,4 +3,5 @@ export interface SidebarItem {
   iconClass: string;
   routeTo: string;
   present: boolean;
+  onClick?: any;
 }

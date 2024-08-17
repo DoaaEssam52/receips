@@ -12,7 +12,7 @@
     <input
       type="email"
       class="form-control input-lg"
-      placeholder="Enter your E-mail"
+      placeholder="email"
       formControlName="email"
     />
   </div>
@@ -39,7 +39,7 @@
     <input
       [type]="passwordShown ? 'text' : 'password'"
       class="form-control input-lg"
-      placeholder="Password"
+      placeholder="password"
       formControlName="password"
     />
     <div class="input-group-append">
@@ -68,9 +68,15 @@
     </ng-container>
   </div>
 
-  <div class="d-flex justify-content-between mt-2 mb-4">
-    <label [routerLink]="'/auth/register'">Register Now?</label>
-    <label class="text-primary">Forgot Password?</label>
+  <div class="d-flex justify-content-between mt-3 mb-4">
+    <a
+      class="text-decoration-none text-dark fw-medium"
+      [routerLink]="'/auth/register'"
+      >Register Now?</a
+    >
+    <a class="text-primary" [routerLink]="'/auth/forget-password'"
+      >Forgot Password?</a
+    >
   </div>
 
   <button class="w-100 py-2 btn btn-primary" (click)="onSubmit()">Login</button>

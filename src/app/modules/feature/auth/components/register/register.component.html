@@ -2,18 +2,44 @@
 
 <p class="mb-4">Welcome Back! Please enter your details</p>
 
-<form [formGroup]="registerForm" class="row">
-  <div class="col-md-6">
+<form [formGroup]="registerForm" class="row mx-0">
+  <div class="col-12 mb-3">
+    <div class="input-group mx-auto dropzone-container">
+      <ngx-dropzone
+        class="justify-content-center"
+        (change)="selectImage($event)"
+        [disableClick]="files.length > 0"
+      >
+        <ngx-dropzone-label>Upload photo</ngx-dropzone-label>
+
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          *ngFor="let f of files"
+          [file]="f"
+          [removable]="true"
+          (removed)="removeImage(f)"
+        >
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+    </div>
+
+    <small class="text-danger" *ngIf="filesError"
+      >You should upload profile picture</small
+    >
+  </div>
+
+  <div class="col-lg-6 mb-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
-          <i class="fas fa-mobile-screen-button"></i>
+          <i class="fas fa-user"></i>
         </span>
       </div>
       <input
         type="text"
         class="form-control input-lg"
-        placeholder="UserName"
+        placeholder="username"
         formControlName="userName"
       />
     </div>
@@ -28,8 +54,11 @@
         <small class="text-danger" *ngSwitchCase="'required'"
           >Username is required</small
         >
-        <small class="text-danger" *ngSwitchCase="'minLength'"
+        <small class="text-danger" *ngSwitchCase="'minlength'"
           >Username should be at least 4 characters</small
+        >
+        <small class="text-danger" *ngSwitchCase="'maxlength'"
+          >Username should be at most 8 characters</small
         >
         <small class="text-danger" *ngSwitchCase="'pattern'"
           >Username must contain characters and end with numbers without
@@ -39,17 +68,17 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-lg-6 mb-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
-          <i class="fas fa-mobile-screen-button"></i>
+          <i class="far fa-envelope"></i>
         </span>
       </div>
       <input
         type="email"
         class="form-control input-lg"
-        placeholder="Enter your E-mail"
+        placeholder="email"
         formControlName="email"
       />
     </div>
@@ -71,17 +100,17 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-lg-6 mb-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
-          <i class="fas fa-mobile-screen-button"></i>
+          <i class="fas fa-globe-europe"></i>
         </span>
       </div>
       <input
         type="text"
         class="form-control input-lg"
-        placeholder="Country"
+        placeholder=" country"
         formControlName="country"
       />
     </div>
@@ -100,7 +129,7 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-lg-6 mb-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
@@ -108,9 +137,9 @@
         </span>
       </div>
       <input
-        type="text"
+        type="tel"
         class="form-control input-lg"
-        placeholder="PhoneNumber"
+        placeholder=" phone number"
         formControlName="phoneNumber"
       />
     </div>
@@ -127,16 +156,12 @@
         <small class="text-danger" *ngSwitchCase="'required'"
           >Phone number is required</small
         >
-        <small class="text-danger" *ngSwitchCase="'pattern'"
-          >Phone number should start with (010 or 011 or 012 or 015) and
-          contains 11 numbers</small
-        >
       </ng-container>
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="input-group mt-4">
+  <div class="col-lg-6 mb-3">
+    <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
           <i class="fas fa-lock"></i>
@@ -145,11 +170,11 @@
       <input
         [type]="passwordShown ? 'text' : 'password'"
         class="form-control input-lg"
-        placeholder="Password"
+        placeholder="password"
         formControlName="password"
       />
       <div class="input-group-append">
-        <span class="input-group-text" (click)="togglePasswordVisibility()">
+        <span class="input-group-text" (click)="passwordShown = !passwordShown">
           <i [ngClass]="passwordShown ? 'far fa-eye' : 'far fa-eye-slash'"></i>
         </span>
       </div>
@@ -176,50 +201,66 @@
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="input-group mt-4">
+  <div class="col-lg-6 mb-3">
+    <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
           <i class="fas fa-lock"></i>
         </span>
       </div>
       <input
-        [type]="passwordShown ? 'text' : 'password'"
+        [type]="confirmPasswordShown ? 'text' : 'password'"
         class="form-control input-lg"
-        placeholder="Password"
-        formControlName="password"
+        placeholder="confirm password"
+        formControlName="confirmPassword"
       />
       <div class="input-group-append">
-        <span class="input-group-text" (click)="togglePasswordVisibility()">
-          <i [ngClass]="passwordShown ? 'far fa-eye' : 'far fa-eye-slash'"></i>
+        <span
+          class="input-group-text"
+          (click)="confirmPasswordShown = !confirmPasswordShown"
+        >
+          <i
+            [ngClass]="confirmPasswordShown ? 'far fa-eye' : 'far fa-eye-slash'"
+          ></i>
         </span>
       </div>
     </div>
 
     <div
       *ngIf="
-        registerForm.controls.password.touched &&
-        registerForm.controls.password.errors
+        registerForm.controls.confirmPassword.touched &&
+        registerForm.controls.confirmPassword.errors
       "
     >
-      <ng-container [ngSwitch]="registerForm.controls.password | errorMessages">
+      <ng-container
+        [ngSwitch]="registerForm.controls.confirmPassword | errorMessages"
+      >
         <small class="text-danger" *ngSwitchCase="'required'"
-          >Password is required</small
+          >Confirm password is required</small
         >
         <small class="text-danger" *ngSwitchCase="'minlength'"
-          >Password should be at least 4 characters</small
+          >Confirm password should be at least 4 characters</small
         >
         <small class="text-danger" *ngSwitchCase="'pattern'"
-          >Password should contain at least 1 lowercase 1 uppercase 1 number and
-          1 special character</small
+          >Confirm password should contain at least 1 lowercase 1 uppercase 1
+          number and 1 special character</small
         >
       </ng-container>
+      <small
+        class="text-danger"
+        *ngIf="
+          registerForm.controls.confirmPassword.touched &&
+          !registerForm.controls.confirmPassword.errors &&
+          registerForm.errors?.['notMatch']
+        "
+        >Confirm password must match password</small
+      >
     </div>
   </div>
 
-  <div class="col-12 d-flex justify-content-end mt-2 mb-4">
-    <label [routerLink]="'/auth/forget-password'" class="text-primary"
-      >Forgot Password?</label
+  <div class="col-12 d-flex justify-content-end mb-4">
+    <a [routerLink]="'/auth/login'" class="text-primary"
+      >Already have account login?</a
     >
   </div>
 

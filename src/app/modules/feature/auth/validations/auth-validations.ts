@@ -1,6 +1,7 @@
 export const AuthValidations = {
   userName: {
     minLength: 4,
+    maxLength: 8,
     pattern: '[a-zA-Z]+[0-9]+',
   },
   phoneNumber: {
@@ -9,5 +10,8 @@ export const AuthValidations = {
   password: {
     minLength: 6,
     pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|:"<>?]).*',
+  },
+  verifyCode: {
+    pattern: '^([a-zA-Z]|[0-9]){4}$',
   },
 };

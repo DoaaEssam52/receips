@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <nav class="navbar d-flex justify-content-end my-2">
+    <div class="cursor-pointer">
+      <div
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="px-4 py-2 d-flex align-items-center cursor-pointer"
+      >
+        <mat-icon>person</mat-icon>
+        <label class="mx-2">{{ userName }}</label>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/profile'">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </nav>
+</div>
