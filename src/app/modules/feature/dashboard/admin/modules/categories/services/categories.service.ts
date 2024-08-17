@@ -4,9 +4,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { GetCategoriesListResponse } from '../../../../../../shared/models/get-categories-list-response-model';
+import { AddCategoryResponse } from '../models/add-category-response-model';
+import { ListHeader } from 'src/app/modules/shared/models/list-model';
 
 import { environment } from '../../../../../../../core/environments/environment';
-import { ListHeader } from 'src/app/modules/shared/models/list-model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,8 +31,11 @@ export class CategoriesService {
     );
   }
 
-  addCategory(name: string): Observable<any> {
-    return this._httpClient.post(environment.createCategory, { name });
+  addCategory(name: string): Observable<AddCategoryResponse> {
+    return this._httpClient.post<AddCategoryResponse>(
+      environment.createCategory,
+      { name }
+    );
   }
 
   updateCategory(id: number, name: string): Observable<any> {

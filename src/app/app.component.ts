@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { LookUpsService } from './services/look-ups-service';
-import { SpinnerService } from './services/spinner.service';
 
 @Component({
   selector: 'root',
@@ -11,7 +10,6 @@ import { SpinnerService } from './services/spinner.service';
 export class AppComponent {
   constructor(
     private _lookUps: LookUpsService,
-    private _spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {

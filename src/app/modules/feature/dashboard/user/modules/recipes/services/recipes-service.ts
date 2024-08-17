@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { ListHeader } from './../../../../../../../modules/shared/models/list-model';
 import { GetRecipesList } from './../../../../../../../modules/shared/models/get-recipes-list-model';
+import { Recipe } from './../../../../../../../modules/shared/models/recipe-model';
 
 import { environment } from '../../../../../../../core/environments/environment';
 
@@ -36,8 +37,8 @@ export class RecipesService {
     });
   }
 
-  getRecipeById(id: any): Observable<any> {
-    return this._httpClient.get(environment.getRecipe + id);
+  getRecipeById(id: any): Observable<Recipe> {
+    return this._httpClient.get<Recipe>(environment.getRecipe + id);
   }
 
   // Handle Data
