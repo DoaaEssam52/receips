@@ -1,0 +1,11 @@
+.content-on-expanded-sidebar {
+  margin-left: 243px;
+
+  min-width: calc(100vw - 243px);
+}
+
+.content-on-collpased-sidebar {
+  margin-left: 50px;
+
+  min-width: calc(100vw - 50px);
+}

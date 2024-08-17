@@ -1,45 +1,39 @@
 <div class="px-4">
-  <ng-container *ngIf="categoriesList && categoriesList.length > 0">
-    <div
-      class="banner p-3 border d-flex justify-content-between align-items-center rounded-4"
+  <div
+    class="banner p-3 border d-flex justify-content-between align-items-center rounded-4"
+  >
+    <div class="px-4">
+      <h1>Categories Items!</h1>
+      <p>
+        You can now add your items that any user can order it from <br />the
+        Application and you can edit
+      </p>
+    </div>
+    <img src="../../../../../../../../../assets/images/banner-2.svg" />
+  </div>
+
+  <div class="my-4 d-flex justify-content-between align-items-center">
+    <div>
+      <h5>Categories Table Details</h5>
+      <p class="mb-0">You can check all details</p>
+    </div>
+    <button
+      mat-raised-button
+      class="btn-primary text-white"
+      (click)="openAddEditCategory('Add')"
     >
-      <div class="px-4">
-        <h1>Categories Items!</h1>
-        <p>
-          You can now add your items that any user can order it from <br />the
-          Application and you can edit
-        </p>
-      </div>
-      <img src="../../../../../../../../../assets/images/banner-2.svg" />
-    </div>
+      Add Category
+    </button>
+  </div>
 
-    <div class="my-4 d-flex justify-content-between align-items-center">
-      <div>
-        <h5>Categories Table Details</h5>
-        <p class="mb-0">You can check all details</p>
-      </div>
-      <button
-        mat-raised-button
-        class="btn-primary text-white"
-        (click)="openAddEditCategory('Add')"
-      >
-        Add Category
-      </button>
-    </div>
-
-    <list
-      [headers]="headers"
-      [data]="categoriesList"
-      [length]="length"
-      [pageNumber]="pageNumber"
-      [pageSize]="pageSize"
-      (handleEditEvent)="openAddEditCategory('Edit', $event)"
-      (handeDeleteEvent)="openDeleteCategory($event)"
-      (handlePageEvent)="handlePageEvent($event)"
-    ></list>
-  </ng-container>
-
-  <ng-container *ngIf="categoriesList && categoriesList.length === 0">
-    <empty-list></empty-list>
-  </ng-container>
+  <list
+    [headers]="headers"
+    [data]="categoriesList"
+    [length]="length"
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    (handleEditEvent)="openAddEditCategory('Edit', $event)"
+    (handeDeleteEvent)="openDeleteCategory($event)"
+    (handlePageEvent)="handlePageEvent($event)"
+  ></list>
 </div>
